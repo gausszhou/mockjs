@@ -36,7 +36,10 @@ const Mock = {
     valid: valid,
     heredoc: Util.heredoc,
     setup: function(settings) {
-        return getXHR().then(xhr => xhr.setup(settings))
+        return getXHR().then(xhr => {
+            if (!xhr) return Promise.resolve(undefined)
+            return xhr.setup(settings)
+        })
     },
     _mocked: {}
 }
