@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import Mock from '../../src/mock.js'
+import Mock from '@/mock.js'
 
 describe('Mock.valid', function() {
     function doit(tpl, data, len) {
