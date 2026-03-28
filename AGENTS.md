@@ -7,8 +7,11 @@ Mock.js generates random data and intercepts Ajax requests. Source in `src/`, te
 ## Build, Lint, and Test Commands
 
 ```bash
+# Install dependencies (use pnpm)
+pnpm install
+
 # Run tests (Mocha + PhantomJS)
-npm test
+pnpm test
 gulp mocha
 
 # Lint only
@@ -23,6 +26,8 @@ gulp webpack
 # Dev server on port 5050 with watch
 gulp
 ```
+
+**Note**: This project uses [pnpm](https://pnpm.io/) as the package manager.
 
 **Running a single test**: Edit `test/test.mock.html` to load only specific test files, or modify the test file directly to run specific cases.
 
