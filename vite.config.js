@@ -11,7 +11,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/mock.js'),
       name: 'Mock',
-      formats: ['es', 'umd']
+      formats: ['umd']
     },
     rollupOptions: {
       external: ['window', 'document'],
