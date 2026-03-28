@@ -1,11 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import Mock from '../src/mock.js'
+import Mock from '../../src/mock.js'
 
 describe('Mock.valid', function() {
-    function stringify(json) {
-        return JSON.stringify(json)
-    }
-
     function doit(tpl, data, len) {
         it('validates data against template', function() {
             var result = Mock.valid(tpl, data)
@@ -268,5 +264,14 @@ describe('Mock.valid', function() {
         }, {
             name: 123
         }, 0)
+    })
+
+    describe('Mock.valid() API', function() {
+        it('validates data against template', function() {
+            var template = { name: '@NAME' }
+            var data = { name: 'John' }
+            var result = Mock.valid(template, data)
+            expect(result).to.be.an('array')
+        })
     })
 })

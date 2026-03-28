@@ -1,11 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import Mock from '../src/mock.js'
+import Mock from '../../src/mock.js'
 
-describe('Schema', function() {
-    function stringify(json) {
-        return JSON.stringify(json)
-    }
-
+describe('Mock.schema', function() {
     function doit(template, validator) {
         it('validates template', function() {
             var schema = Mock.toJSONSchema(template)
@@ -159,6 +155,15 @@ describe('Schema', function() {
             expect(properties[0]).to.have.property('type', 'string')
             expect(properties[0].rule).to.have.property('min', 3)
             expect(properties[0].rule.max).to.be.an('undefined')
+        })
+    })
+
+    describe('Mock.toJSONSchema() API', function() {
+        it('converts template to JSON schema', function() {
+            var template = { name: '@NAME' }
+            var schema = Mock.toJSONSchema(template)
+            expect(schema).to.be.an('object')
+            expect(schema).to.have.property('type', 'object')
         })
     })
 })
