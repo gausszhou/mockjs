@@ -1,34 +1,17 @@
-/* global require, chai, describe, before, it */
-/* global window */
-// 数据占位符定义（Data Placeholder Definition，DPD）
-var expect = chai.expect
-var Mock, Random, $, _, Random
+import { describe, it, expect, before } from 'vitest'
+import Mock from '../src/mock.js'
 
-/* jshint -W061 */
+const { Random } = Mock
+
 describe('Random', function() {
-    before(function(done) {
-        require(['mock', 'underscore', 'jquery'], function() {
-            Mock = arguments[0]
-            window.Random = Random = Mock.Random
-            _ = arguments[1]
-            $ = arguments[2]
-            expect(Mock).to.not.equal(undefined)
-            expect(_).to.not.equal(undefined)
-            expect($).to.not.equal(undefined)
-            done()
-        })
-    })
-
     function stringify(json) {
-        return JSON.stringify(json /*, null, 4*/ )
+        return JSON.stringify(json)
     }
 
     function doit(expression, validator) {
-        it('', function() {
-            // for (var i = 0; i < 1; i++) {}
-            var data = eval(expression)
+        it(expression, function() {
+            const data = eval(expression)
             validator(data)
-            this.test.title = stringify(expression) + ' => ' + stringify(data)
         })
     }
 
@@ -54,7 +37,6 @@ describe('Random', function() {
             expect(data).to.be.a('number').within(-10, 10)
         })
 
-        // 1 整数部分 2 小数部分
         var RE_FLOAT = /(\-?\d+)\.?(\d+)?/
 
         function validFloat(float, min, max, dmin, dmax) {
@@ -63,7 +45,6 @@ describe('Random', function() {
 
             expect(+parts[1]).to.be.a('number').within(min, max)
 
-            /* jshint -W041 */
             if (parts[2] != undefined) {
                 expect(parts[2]).to.have.length.within(dmin, dmax)
             }
@@ -221,20 +202,14 @@ describe('Random', function() {
         doit('Random.image()', function(data) {
             expect(data).to.be.ok
         })
-        it('Random.dataImage()', function() {
-            var data = eval(this.test.title)
+        doit('Random.dataImage()', function(data) {
             expect(data).to.be.ok
-            this.test.title = stringify(this.test.title) + ' => '
         })
-        it('Random.dataImage("200x100")', function() {
-            var data = eval(this.test.title)
+        doit('Random.dataImage("200x100")', function(data) {
             expect(data).to.be.ok
-            this.test.title = stringify(this.test.title) + ' => '
         })
-        it('Random.dataImage("200x100", "Hello Mock.js!")', function() {
-            var data = eval(this.test.title)
+        doit('Random.dataImage("200x100", "Hello Mock.js!")', function(data) {
             expect(data).to.be.ok
-            this.test.title = stringify(this.test.title) + ' => '
         })
     })
 
@@ -244,19 +219,19 @@ describe('Random', function() {
     var RE_COLOR_HSL = /^hsl\(\d{1,3}, \d{1,3}, \d{1,3}\)$/
     describe('Color', function() {
         doit('Random.color()', function(data) {
-            expect(RE_COLOR.test(data)).to.true
+            expect(RE_COLOR.test(data)).to.be.true
         })
         doit('Random.hex()', function(data) {
-            expect(RE_COLOR.test(data)).to.true
+            expect(RE_COLOR.test(data)).to.be.true
         })
         doit('Random.rgb()', function(data) {
-            expect(RE_COLOR_RGB.test(data)).to.true
+            expect(RE_COLOR_RGB.test(data)).to.be.true
         })
         doit('Random.rgba()', function(data) {
-            expect(RE_COLOR_RGBA.test(data)).to.true
+            expect(RE_COLOR_RGBA.test(data)).to.be.true
         })
         doit('Random.hsl()', function(data) {
-            expect(RE_COLOR_HSL.test(data)).to.true
+            expect(RE_COLOR_HSL.test(data)).to.be.true
         })
     })
 
@@ -296,21 +271,21 @@ describe('Random', function() {
 
         doit('Random.title()', function(data) {
             var words = data.split(' ')
-            _.each(words, function(word) {
+            words.forEach(function(word) {
                 expect(word[0]).to.equal(word[0].toUpperCase())
             })
             expect(words).to.have.length.within(3, 7)
         })
         doit('Random.title(4)', function(data) {
             var words = data.split(' ')
-            _.each(words, function(word) {
+            words.forEach(function(word) {
                 expect(word[0]).to.equal(word[0].toUpperCase())
             })
             expect(words).to.have.length(4)
         })
         doit('Random.title(3, 5)', function(data) {
             var words = data.split(' ')
-            _.each(words, function(word) {
+            words.forEach(function(word) {
                 expect(word[0]).to.equal(word[0].toUpperCase())
             })
             expect(words).to.have.length.within(3, 5)

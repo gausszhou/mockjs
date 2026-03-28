@@ -1,39 +1,14 @@
-/* global require, chai, describe, before, it */
-/* global window */
-var expect = chai.expect
-var Mock, Random, $, _
+import { describe, it, expect } from 'vitest'
+import Mock from '../src/mock.js'
 
 describe('Mock.valid', function() {
-    before(function(done) {
-        require(['mock', 'underscore', 'jquery'], function() {
-            Mock = arguments[0]
-            window.Random = Random = Mock.Random
-            _ = arguments[1]
-            $ = arguments[2]
-            expect(Mock).to.not.equal(undefined)
-            expect(_).to.not.equal(undefined)
-            expect($).to.not.equal(undefined)
-            done()
-        })
-    })
-
     function stringify(json) {
-        return JSON.stringify(json /*, null, 4*/ )
-    }
-
-    function title(tpl, data, result, test) {
-        test.title = stringify(tpl) + ' VS ' + stringify(data) + '\n\tresult: ' + stringify(result)
-
-        // if (result.length) test.title += '\n\tresult: '
-        // for (var i = 0; i < result.length; i++) {
-        //     test.title += '\n\t' + result[i].message // stringify(result)
-        // }
+        return JSON.stringify(json)
     }
 
     function doit(tpl, data, len) {
-        it('', function() {
+        it('validates data against template', function() {
             var result = Mock.valid(tpl, data)
-            title(tpl, data, result, this.test)
             expect(result).to.be.an('array').with.length(len)
         })
     }
@@ -131,7 +106,7 @@ describe('Mock.valid', function() {
             name: 'valuevaluevaluevalue'
         }, 1)
     })
-    describe('Value - RgeExp', function() {
+    describe('Value - RegExp', function() {
         doit({
             name: /value/
         }, {
@@ -207,10 +182,8 @@ describe('Mock.valid', function() {
     })
     describe('Value - Array', function() {
         doit([1, 2, 3], [1, 2, 3], 0)
-
         doit([1, 2, 3], [1, 2, 3, 4], 1)
 
-        // 'name|1': array
         doit({
             'name|1': [1, 2, 3]
         }, {
@@ -226,13 +199,12 @@ describe('Mock.valid', function() {
         }, {
             'name': 3
         }, 0)
-        doit({ // 不检测
+        doit({
             'name|1': [1, 2, 3]
         }, {
             'name': 4
         }, 0)
 
-        // 'name|+1': array
         doit({
             'name|+1': [1, 2, 3]
         }, {
@@ -254,44 +226,36 @@ describe('Mock.valid', function() {
             'name': 4
         }, 0)
 
-        // 'name|min-max': array
         doit({
             'name|2-3': [1]
         }, {
             'name': [1, 2, 3, 4]
         }, 1)
-
         doit({
             'name|2-3': [1]
         }, {
             'name': [1]
         }, 1)
-
         doit({
             'name|2-3': [1, 2, 3]
         }, {
             'name': [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
         }, 1)
-
         doit({
             'name|2-3': [1, 2, 3]
         }, {
             'name': [1, 2, 3]
         }, 1)
-
         doit({
             'name|2-3': [1]
         }, {
             'name': [1, 1, 1]
         }, 0)
-
         doit({
             'name|2-3': [1]
         }, {
             'name': [1, 2, 3]
         }, 2)
-
-        // 'name|count': array
     })
     describe('Value - Placeholder', function() {
         doit({
