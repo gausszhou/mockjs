@@ -163,3 +163,4 @@ Random.natural() // Same as above
 - Gulp for automation, Webpack 1.x for bundling
 - Tests run in PhantomJS (headless)
 - Works in Node.js and browser
+- **Do NOT auto-commit or auto-push code** - let the user decide when to commit
