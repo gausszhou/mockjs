@@ -137,6 +137,23 @@ dist/
 4. **XHR**: Replace `XMLHttpRequest` to intercept requests
 5. **UMD build**: Exposes `Mock` as UMD library
 
+## Seed Support
+Random data generation supports seeding for reproducible results:
+```javascript
+// Get current seed
+Random.getSeed()
+
+// Set seed (returns Random for chaining)
+Random.setSeed(12345)
+Random.seed(12345)
+
+// With same seed, generated data is deterministic
+Random.setSeed(12345)
+Random.natural() // Always returns same value
+Random.setSeed(12345)
+Random.natural() // Same as above
+```
+
 ## Notes
 - Gulp for automation, Webpack 1.x for bundling
 - Tests run in PhantomJS (headless)

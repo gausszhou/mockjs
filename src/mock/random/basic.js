@@ -7,10 +7,10 @@ module.exports = {
         if (cur !== undefined) {
             min = typeof min !== 'undefined' && !isNaN(min) ? parseInt(min, 10) : 1
             max = typeof max !== 'undefined' && !isNaN(max) ? parseInt(max, 10) : 1
-            return Math.random() > 1.0 / (min + max) * min ? !cur : cur
+            return this._random.next() > 1.0 / (min + max) * min ? !cur : cur
         }
 
-        return Math.random() >= 0.5
+        return this._random.next() >= 0.5
     },
     bool: function(min, max, cur) {
         return this.boolean(min, max, cur)
@@ -19,13 +19,13 @@ module.exports = {
     natural: function(min, max) {
         min = typeof min !== 'undefined' ? parseInt(min, 10) : 0
         max = typeof max !== 'undefined' ? parseInt(max, 10) : 9007199254740992 // 2^53
-        return Math.round(Math.random() * (max - min)) + min
+        return Math.round(this._random.next() * (max - min)) + min
     },
     // 返回一个随机的整数。
     integer: function(min, max) {
         min = typeof min !== 'undefined' ? parseInt(min, 10) : -9007199254740992
         max = typeof max !== 'undefined' ? parseInt(max, 10) : 9007199254740992 // 2^53
-        return Math.round(Math.random() * (max - min)) + min
+        return Math.round(this._random.next() * (max - min)) + min
     },
     int: function(min, max) {
         return this.integer(min, max)

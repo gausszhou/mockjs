@@ -7,7 +7,20 @@
 var Util = require('../util')
 
 var Random = {
-    extend: Util.extend
+    extend: Util.extend,
+    _random: new Util.Random(Date.now()),
+    _seed: Date.now(),
+    seed: function(seed) {
+        Random._seed = seed
+        Random._random = new Util.Random(seed)
+        return Random
+    },
+    setSeed: function(seed) {
+        return Random.seed(seed)
+    },
+    getSeed: function() {
+        return Random._seed
+    }
 }
 
 Random.extend(require('./basic'))
