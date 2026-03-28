@@ -53,12 +53,10 @@
         null-character      \o      NUL 字符
  */
 
-var Util = require('../util')
-var Random = require('../random/')
-    /*
-        
-    */
-var Handler = {
+import Util from '../util'
+import Random from '../random/'
+
+const Handler = {
     extend: Util.extend
 }
 
@@ -389,4 +387,4 @@ Handler.extend({
     }
 })
 
-module.exports = Handler
+export default Handler

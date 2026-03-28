@@ -3,7 +3,7 @@
 
     [Beyond the Top 1000 Names](http://www.ssa.gov/oact/babynames/limits.html)
 */
-module.exports = {
+export default {
 	// 随机生成一个常见的英文名。
 	first: function() {
 		var names = [

@@ -10,29 +10,36 @@
     "mockAjax"
   ],
   "author": "nuysoft@gmail.com",
+  "type": "module",
+  "main": "./dist/mock.js",
+  "module": "./dist/mock.esm.js",
+  "exports": {
+    ".": {
+      "import": "./dist/mock.esm.js",
+      "require": "./dist/mock.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "commander": "*"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-connect": "^5.7.0",
-    "gulp-coveralls": "^0.1.4",
-    "gulp-istanbul": "^0.10.4",
-    "gulp-jshint": "^2.1.0",
-    "gulp-mocha": "^2.2.0",
-    "gulp-mocha-phantomjs": "^0.10.1",
-    "jshint": "^2.8.0",
-    "jshint-stylish": "^2.1.0",
-    "webpack": "^1.12.9"
+    "vite": "^6.0.0",
+    "vitest": "^3.0.0",
+    "chai": "^5.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/nuysoft/Mock.git"
   },
-  "main": "./dist/mock.js",
   "scripts": {
-    "test": "gulp mocha",
-    "coveralls": "gulp coveralls"
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "coverage": "vitest --coverage"
   },
   "bin": {
     "random": "bin/random"
@@ -42,8 +49,5 @@
       "type": "MIT",
       "url": "https://github.com/nuysoft/Mock/blob/master/LICENSE"
     }
-  ],
-  "spm": {
-    "main": "dist/mock.js"
-  }
+  ]
 }

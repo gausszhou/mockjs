@@ -140,4 +140,4 @@ Util.Random.prototype = {
     }
 }
 
-module.exports = Util
+export default Util

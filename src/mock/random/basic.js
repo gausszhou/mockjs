@@ -1,7 +1,7 @@
 /*
     ## Basics
 */
-module.exports = {
+export default {
     // 返回一个随机的布尔值。
     boolean: function(min, max, cur) {
         if (cur !== undefined) {

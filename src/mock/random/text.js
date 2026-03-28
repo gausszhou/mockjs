@@ -3,16 +3,21 @@
 
     http://www.lipsum.com/
 */
-var Basic = require('./basic')
-var Helper = require('./helper')
+import Helper from './helper'
 
-function range(defaultMin, defaultMax, min, max) {
-    return min === undefined ? Basic.natural(defaultMin, defaultMax) : // ()
-        max === undefined ? min : // ( len )
-        Basic.natural(parseInt(min, 10), parseInt(max, 10)) // ( min, max )
+let Random
+
+export function init(random) {
+    Random = random
 }
 
-module.exports = {
+function range(defaultMin, defaultMax, min, max) {
+    return min === undefined ? Random.natural(defaultMin, defaultMax) : // ()
+        max === undefined ? min : // ( len )
+        Random.natural(parseInt(min, 10), parseInt(max, 10)) // ( min, max )
+}
+
+export default {
     // 随机生成一段文本。
     paragraph: function(min, max) {
         var len = range(3, 7, min, max)
@@ -55,7 +60,7 @@ module.exports = {
         var len = range(3, 10, min, max)
         var result = '';
         for (var i = 0; i < len; i++) {
-            result += Basic.character('lower')
+            result += Random.character('lower')
         }
         return result
     },

@@ -72,10 +72,10 @@
         return color.toUpperCase()
 */
 
-var Convert = require('./color_convert')
-var DICT = require('./color_dict')
+import Convert from './color_convert'
+import DICT from './color_dict'
 
-module.exports = {
+export default {
     // 随机生成一个有吸引力的颜色，格式为 '#RRGGBB'。
     color: function(name) {
         if (name || DICT[name]) return DICT[name].nicer

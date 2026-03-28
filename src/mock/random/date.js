@@ -61,7 +61,7 @@ var patternLetters = {
     },
     T: 'getTime'
 }
-module.exports = {
+export default {
     // 日期占位符集合。
     _patternLetters: patternLetters,
     // 日期占位符正则。

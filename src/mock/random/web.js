@@ -1,7 +1,7 @@
 /*
     ## Web
 */
-module.exports = {
+export default {
     /*
         随机生成一个 URL。
 

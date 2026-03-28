@@ -22,11 +22,10 @@
 		```
  */
 
-var Constant = require('./constant')
-var Random = require('./random/')
+import Constant from './constant'
+import Random from './random/'
 
-/* jshint -W041 */
-module.exports = {
+export default {
 	parse: function(name) {
 		name = name == undefined ? '' : (name + '')
 

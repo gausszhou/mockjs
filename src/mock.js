@@ -1,20 +1,32 @@
-/* global require, module, window */
-var Handler = require('./mock/handler')
-var Util = require('./mock/util')
-var Random = require('./mock/random')
-var RE = require('./mock/regexp')
-var toJSONSchema = require('./mock/schema')
-var valid = require('./mock/valid')
+/* global window */
+import Handler from './mock/handler'
+import Util from './mock/util'
+import Random from './mock/random'
+import RE from './mock/regexp'
+import toJSONSchema from './mock/schema'
+import valid from './mock/valid'
 
-var XHR
-if (typeof window !== 'undefined') XHR = require('./mock/xhr')
+let XHR
+let xhrPromise
+
+function getXHR() {
+    if (typeof window === 'undefined') return Promise.resolve(undefined)
+    if (XHR) return Promise.resolve(XHR)
+    if (!xhrPromise) {
+        xhrPromise = import('./mock/xhr').then(xhrModule => {
+            XHR = xhrModule.default
+            return XHR
+        })
+    }
+    return xhrPromise
+}
 
 /*!
     Mock - 模拟请求 & 模拟数据
     https://github.com/nuysoft/Mock
     墨智 mozhi.gyy@taobao.com nuysoft@gmail.com
 */
-var Mock = {
+const Mock = {
     Handler: Handler,
     Random: Random,
     Util: Util,
@@ -24,7 +36,7 @@ var Mock = {
     valid: valid,
     heredoc: Util.heredoc,
     setup: function(settings) {
-        return XHR.setup(settings)
+        return getXHR().then(xhr => xhr.setup(settings))
     },
     _mocked: {}
 }
@@ -32,7 +44,14 @@ var Mock = {
 Mock.version = '1.0.1-beta3'
 
 // 避免循环依赖
-if (XHR) XHR.Mock = Mock
+if (typeof window !== 'undefined') {
+    getXHR().then(xhr => {
+        if (xhr) {
+            xhr.Mock = Mock
+            Mock.XHR = xhr
+        }
+    })
+}
 
 /*
     * Mock.mock( template )
@@ -54,8 +73,10 @@ Mock.mock = function(rurl, rtype, template) {
         template = rtype
         rtype = undefined
     }
-    // 拦截 XHR
-    if (XHR) window.XMLHttpRequest = XHR
+    // 拦截 XHR - 异步加载
+    getXHR().then(xhr => {
+        if (xhr) window.XMLHttpRequest = xhr
+    })
     Mock._mocked[rurl + (rtype || '')] = {
         rurl: rurl,
         rtype: rtype,
@@ -64,4 +85,4 @@ Mock.mock = function(rurl, rtype, template) {
     return Mock
 }
 
-module.exports = Mock
+export default Mock

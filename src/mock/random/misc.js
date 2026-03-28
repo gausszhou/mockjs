@@ -1,8 +1,8 @@
 /*
     ## Miscellaneous
 */
-var DICT = require('./address_dict')
-module.exports = {
+import DICT from './address_dict'
+export default {
 	// Dice
 	d4: function() {
 		return this.natural(1, 4)

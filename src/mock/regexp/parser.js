@@ -567,4 +567,4 @@ var parser = function() {
     };
 }(), index = 1, cgs = {};
 
-module.exports = parser
+export default parser

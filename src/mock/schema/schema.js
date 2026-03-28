@@ -5,9 +5,9 @@
 
     > [JSON Schema](http://json-schema.org/)
  */
-var Constant = require('../constant')
-var Util = require('../util')
-var Parser = require('../parser')
+import Constant from '../constant'
+import Util from '../util'
+import Parser from '../parser'
 
 function toJSONSchema(template, name, path /* Internal Use Only */ ) {
     // type rule properties items
@@ -44,4 +44,4 @@ function toJSONSchema(template, name, path /* Internal Use Only */ ) {
 
 }
 
-module.exports = toJSONSchema
+export default toJSONSchema

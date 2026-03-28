@@ -4,9 +4,19 @@
     工具类，用于生成各种随机数据。
 */
 
-var Util = require('../util')
+import Util from '../util'
+import basic from './basic'
+import date from './date'
+import image from './image'
+import color from './color'
+import text, { init as initText } from './text'
+import name from './name'
+import web from './web'
+import address from './address'
+import helper from './helper'
+import misc from './misc'
 
-var Random = {
+const Random = {
     extend: Util.extend,
     _random: new Util.Random(Date.now()),
     _seed: Date.now(),
@@ -23,15 +33,18 @@ var Random = {
     }
 }
 
-Random.extend(require('./basic'))
-Random.extend(require('./date'))
-Random.extend(require('./image'))
-Random.extend(require('./color'))
-Random.extend(require('./text'))
-Random.extend(require('./name'))
-Random.extend(require('./web'))
-Random.extend(require('./address'))
-Random.extend(require('./helper'))
-Random.extend(require('./misc'))
+Random.extend(basic)
+Random.extend(date)
+Random.extend(image)
+Random.extend(color)
+Random.extend(name)
+Random.extend(web)
+Random.extend(address)
+Random.extend(helper)
+Random.extend(misc)
+Random.extend(text)
 
-module.exports = Random
+// Initialize text module with Random reference
+initText(Random)
+
+export default Random

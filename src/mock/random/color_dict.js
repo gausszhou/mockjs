@@ -3,7 +3,7 @@
 
     字典数据来源 [A nicer color palette for the web](http://clrs.cc/)
 */
-module.exports = {
+export default {
     // name value nicer
     navy: {
         value: '#000080',

@@ -2,10 +2,10 @@
     ## Address
 */
 
-var DICT = require('./address_dict')
-var REGION = ['东北', '华北', '华东', '华中', '华南', '西南', '西北']
+import DICT from './address_dict'
+const REGION = ['东北', '华北', '华东', '华中', '华南', '西南', '西北']
 
-module.exports = {
+export default {
     // 随机生成一个大区。
     region: function() {
         return this.pick(REGION)

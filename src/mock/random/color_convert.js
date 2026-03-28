@@ -5,7 +5,7 @@
         颜色空间RGB与HSV(HSL)的转换
 */
 // https://github.com/harthur/color-convert/blob/master/conversions.js
-module.exports = {
+export default {
 	rgb2hsl: function rgb2hsl(rgb) {
 		var r = rgb[0] / 255,
 			g = rgb[1] / 255,

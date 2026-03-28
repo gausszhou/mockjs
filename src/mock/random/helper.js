@@ -2,9 +2,9 @@
     ## Helpers
 */
 
-var Util = require('../util')
+import Util from '../util'
 
-module.exports = {
+export default {
 	// 把字符串的第一个字母转换为大写。
 	capitalize: function(word) {
 		return (word + '').charAt(0).toUpperCase() + (word + '').substr(1)

@@ -44,7 +44,7 @@
     onreadystatechange  readystatechange
  */
 
-var Util = require('../util')
+import Util from '../util'
 
 // 备份原生 XMLHttpRequest
 window._XMLHttpRequest = window.XMLHttpRequest
@@ -439,4 +439,4 @@ function convert(item, options) {
         item.template(options) : MockXMLHttpRequest.Mock.mock(item.template)
 }
 
-module.exports = MockXMLHttpRequest
+export default MockXMLHttpRequest

@@ -20,9 +20,9 @@
     [JSON-Schama validator](http://json-schema-validator.herokuapp.com/)
     [Regexp Demo](http://demos.forbeslindesay.co.uk/regexp/)
 */
-var Constant = require('../constant')
-var Util = require('../util')
-var toJSONSchema = require('../schema')
+import Constant from '../constant'
+import Util from '../util'
+import toJSONSchema from '../schema'
 
 function valid(template, data) {
     var schema = toJSONSchema(template)
@@ -442,4 +442,4 @@ var Assert = {
 valid.Diff = Diff
 valid.Assert = Assert
 
-module.exports = valid
+export default valid

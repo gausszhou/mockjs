@@ -2,7 +2,7 @@
 /*
     ## Image
 */
-module.exports = {
+export default {
     // 常见的广告宽高
     _adSize: [
         '300x250', '250x250', '240x400', '336x280', '180x150',

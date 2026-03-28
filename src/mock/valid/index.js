@@ -1,1 +1,1 @@
-module.exports = require('./valid')
+export { default } from './valid'

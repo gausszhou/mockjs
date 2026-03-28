@@ -31,11 +31,11 @@
 
 */
 
-var Constant = require('./constant')
-var Util = require('./util')
-var Parser = require('./parser')
-var Random = require('./random/')
-var RE = require('./regexp')
+import Constant from './constant'
+import Util from './util'
+import Parser from './parser'
+import Random from './random/'
+import RE from './regexp'
 
 var Handler = {
     extend: Util.extend
@@ -541,4 +541,4 @@ Handler.extend({
     }
 })
 
-module.exports = Handler
+export default Handler
