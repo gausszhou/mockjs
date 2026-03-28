@@ -46,7 +46,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "vitest run --passWithNoTests"
+      "vitest run"
     ]
   },
   "bin": {
