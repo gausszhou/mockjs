@@ -1,9 +1,12 @@
 bak
 .DS_Store
-.*.swp
+.swp
 .idea
 node_modules
 bower_components
 coverage
 PLAN.md
 npm-debug.log
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

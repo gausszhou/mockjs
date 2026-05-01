@@ -7,8 +7,11 @@ Mock.js generates random data and intercepts Ajax requests. Source in `src/`, te
 ## Build, Lint, and Test Commands
 
 ```bash
+# Install dependencies (use pnpm)
+pnpm install
+
 # Run tests (Mocha + PhantomJS)
-npm test
+pnpm test
 gulp mocha
 
 # Lint only
@@ -23,6 +26,8 @@ gulp webpack
 # Dev server on port 5050 with watch
 gulp
 ```
+
+**Note**: This project uses [pnpm](https://pnpm.io/) as the package manager.
 
 **Running a single test**: Edit `test/test.mock.html` to load only specific test files, or modify the test file directly to run specific cases.
 
@@ -137,7 +142,25 @@ dist/
 4. **XHR**: Replace `XMLHttpRequest` to intercept requests
 5. **UMD build**: Exposes `Mock` as UMD library
 
+## Seed Support
+Random data generation supports seeding for reproducible results:
+```javascript
+// Get current seed
+Random.getSeed()
+
+// Set seed (returns Random for chaining)
+Random.setSeed(12345)
+Random.seed(12345)
+
+// With same seed, generated data is deterministic
+Random.setSeed(12345)
+Random.natural() // Always returns same value
+Random.setSeed(12345)
+Random.natural() // Same as above
+```
+
 ## Notes
 - Gulp for automation, Webpack 1.x for bundling
 - Tests run in PhantomJS (headless)
 - Works in Node.js and browser
+- **Do NOT auto-commit or auto-push code** - let the user decide when to commit

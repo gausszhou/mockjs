@@ -105,7 +105,7 @@ module.exports = {
             parseInt(rgb[0], 10) + ', ' +
             parseInt(rgb[1], 10) + ', ' +
             parseInt(rgb[2], 10) + ', ' +
-            Math.random().toFixed(2) + ')'
+            this._random.next().toFixed(2) + ')'
     },
     // hsl(300,80%,90%)
     hsl: function() {
@@ -121,7 +121,7 @@ module.exports = {
     // 随机生成一个有吸引力的颜色。
     _goldenRatioColor: function(saturation, value) {
         this._goldenRatio = 0.618033988749895
-        this._hue = this._hue || Math.random()
+        this._hue = this._hue || this._random.next()
         this._hue += this._goldenRatio
         this._hue %= 1
 
