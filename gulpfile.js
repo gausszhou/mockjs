@@ -43,10 +43,24 @@ gulp.task('connect', function() {
     })
 })
 
+// Compile TypeScript
+gulp.task('tsc', function(cb) {
+    exec('npx tsc && cp src/mock/random/address_dict.js tsbuild/mock/random/address_dict.js', function(error, stdout, stderr) {
+        if (error) {
+            console.log('TypeScript compilation error:')
+            console.log(stdout)
+            console.log(stderr)
+            cb(error)
+        } else {
+            cb()
+        }
+    })
+})
+
 // https://github.com/spenceralger/gulp-jshint
 gulp.task('jshint', function() {
     var globs = [
-        'src/**/*.js', 'test/test.*.js', 'gulpfile.js', '!**/regexp/parser.js'
+        '!src/**/*.ts', 'src/**/*.js', 'test/test.*.js', 'gulpfile.js', '!**/regexp/parser.js'
     ]
     return gulp.src(globs)
         .pipe(jshint('.jshintrc'))
@@ -54,9 +68,9 @@ gulp.task('jshint', function() {
 })
 
 // https://webpack.github.io/docs/usage-with-gulp.html
-gulp.task("webpack", function( /*callback*/ ) {
+gulp.task("webpack", ['tsc'], function( /*callback*/ ) {
     webpack({
-        entry: './src/mock.js',
+        entry: './tsbuild/mock.js',
         output: {
             path: './dist',
             filename: 'mock.js',
@@ -68,7 +82,7 @@ gulp.task("webpack", function( /*callback*/ ) {
         if (err) throw err
     })
     webpack({
-        entry: './src/mock.js',
+        entry: './tsbuild/mock.js',
         devtool: 'source-map',
         output: {
             path: './dist',
@@ -97,7 +111,7 @@ gulp.task('mocha', function() {
 
 
 // https://github.com/floatdrop/gulp-watch
-var watchTasks = ['hello', 'madge', 'jshint', 'webpack', 'mocha']
+var watchTasks = ['hello', 'madge', 'tsc', 'jshint', 'webpack', 'mocha']
 gulp.task('watch', function( /*callback*/ ) {
     gulp.watch(['src/**/*.js', 'gulpfile.js', 'test/*'], watchTasks)
 })
@@ -162,3 +176,4 @@ gulp.task('publish', function() {
 
 gulp.task('default', watchTasks.concat(['watch', 'connect']))
 gulp.task('build', ['jshint', 'webpack', 'mocha'])
+gulp.task('tscbuild', ['tsc', 'webpack'])
