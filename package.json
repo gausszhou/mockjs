@@ -29,6 +29,7 @@
     "phantomjs-prebuilt": "^2.1.16",
     "puppeteer": "^24.43.1",
     "typescript": "^6.0.3",
+    "vitest": "^4.1.8",
     "webpack": "^1.12.9"
   },
   "repository": {
@@ -37,7 +38,8 @@
   },
   "main": "./dist/mock.js",
   "scripts": {
-    "test": "gulp mocha",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "coveralls": "gulp coveralls"
   },
   "bin": {
