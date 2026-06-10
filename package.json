@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/node": "^25.9.2",
     "chai": "^6.2.2",
+    "esbuild": "^0.28.0",
     "gulp": "^3.9.0",
     "gulp-connect": "^5.7.0",
     "gulp-coveralls": "^0.1.4",
@@ -29,6 +30,7 @@
     "phantomjs-prebuilt": "^2.1.16",
     "puppeteer": "^24.43.1",
     "typescript": "^6.0.3",
+    "vite": "^8.0.16",
     "vitest": "^4.1.8",
     "webpack": "^1.12.9"
   },
@@ -38,6 +40,7 @@
   },
   "main": "./dist/mock.js",
   "scripts": {
+    "build": "vite build && vite build --mode minify",
     "test": "vitest run",
     "test:watch": "vitest",
     "coveralls": "gulp coveralls"
